@@ -1,0 +1,184 @@
+<app-navbar></app-navbar>
+<div class="container">
+
+    <div class="row">
+
+
+    <mat-card>    
+
+      <div class="col-md-12 col-sm-12 col-xl-12 mt-4">
+
+        <button class="btn btn-lg btn-outline-primary" style="float:right; margin-bottom: 40px" (click)="open(add)">
+            <i class="fa-solid fa-user"></i> Add New User</button>
+        
+           
+                <table class="table">
+                
+                    <thead>
+                        <th style="text-align:center">Profile Picture</th>
+                        <th style="text-align:center">Name</th>
+                        <th style="text-align:center">Age</th>
+                        <th style="text-align:center">Email</th>
+                        <th style="text-align:center">Phone Number</th>
+                        <th style="text-align:center">Actions</th>
+                    </thead>
+    
+                    <tbody>
+                        <tr id="table-row" *ngFor="let user of UserData">
+    
+                            <td class="userdata" style="width:100px" *ngFor="let dat of data?.results">
+                                <img class="image" id="myImg" src={{dat.picture?.large}} alt="picture">
+                            </td>
+    
+                            <td class="userdatas" style="width:200px">{{user.name}}</td>
+                            <td class="userdatas" style="width:100px">{{user.age}}</td>
+                            <td class="userdatas" style="width:200px">{{user.email}}</td>
+                            <td class="userdatas" style="width:200px">{{user.phone_Number}}</td>
+    
+                            <td class="userdatas" style="width:200px">
+                                <button (click)="editUser(user); open(edit)" style="margin-right: 15px" mat-raised-button color="primary">Edit <i class="fa-solid fa-pen-to-square"></i></button>
+                                <button mat-raised-button color="warn" (click)="deleteUsers(user._id)">Delete <i class="fa-solid fa-trash-can"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+        </div>
+    </mat-card>
+
+    </div>
+</div> 
+
+
+
+
+
+<!--Adding new user-->
+
+<ng-template #add let-modal>
+
+        <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add New Customer Details</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+
+        <div class="modal-body m-3">
+
+            <form #userForm = "ngForm" (ngSubmit)="postUsers(userForm)" novalidate>
+                <input type="hidden" class="form-control mt-2" name="_id" #_id="ngModel" [(ngModel)]="userService.selectedUser._id" placeholder="_id">
+
+                <!--Name-->
+                <div class="form-group mt-2">
+                    <label for="name mt-2">Enter the Name:</label>
+                    <input type="text" class="form-control" name="name" maxlength="32" #name="ngModel" required id="name" pattern="{1,32}"
+                    [(ngModel)]="userService.selectedUser.name" class="form-control" [class.success]="!name.invalid">
+                     <div *ngIf="name.errors &&(name.touched || name.dirty)" class ="text-error mt-2">
+                          Enter the Name - Max (32) Characters
+                    </div>
+                </div>
+
+                
+                <!--Age-->
+                <div class="form-group mt-4">
+                    <label for="age mt-2">Enter Age:</label>
+                    <input type="number" class="form-control" name="age" maxlength="3" minlength="1" #age="ngModel" required id="age" pattern="^(1?[1-9]|[1-9][0-9]|100)$"
+                    [(ngModel)]="userService.selectedUser.age" class="form-control" [class.success]="!age.invalid">
+                     <div *ngIf="age.errors &&(age.touched || age.dirty)" class ="text-error mt-2">
+                          Enter valid age & age should be (1 - 100)
+                    </div>
+                </div>
+
+                <!--Email-->
+                <div class="form-group mt-4">
+                    <label for="email mt-2">Enter the Email:</label>
+                    <input type="email" class="form-control" name="email" #email="ngModel" required id="email" pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                    [(ngModel)]="userService.selectedUser.email" class="form-control" [class.success]="!email.invalid">
+                     <div *ngIf="email.errors &&(email.touched || email.dirty)" class ="text-error mt-2">
+                         Enter Valid Email pattern - john@mail.com
+                    </div>
+                </div>
+
+                <!--phone number-->
+                <div class="form-group mt-4">
+                    <label for="phone_Number mt-2">Enter the Phone Number:</label>
+                    <input type="number" class="form-control" size="10" name="phone_Number" #phone_Number="ngModel" required id="phone_Number" pattern="^[6-9]\d{9}$"
+                    [(ngModel)]="userService.selectedUser.phone_Number" class="form-control" [class.success]="!phone_Number.invalid">
+                     <div *ngIf="phone_Number.errors &&(phone_Number.touched || phone_Number.dirty)" class ="text-error mt-2">
+                          Enter valid phone number (10) 
+                    </div>
+                </div>
+
+
+                <button type="submit" class="btn btn btn-primary mt-4" [disabled]="!userForm.form.valid" (click)="modal.dismiss('Cross click')">Add</button>
+                <button type="reset" class="btn btn btn-danger mt-4" style="float:right">Reset</button>
+            </form>
+        </div>
+
+  </ng-template>
+  
+
+
+
+<!--Editing new user-->
+
+<ng-template #edit let-modal>
+
+    <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Edit Customer Details</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+
+    <div class="modal-body m-3">
+
+        <form #userForm = "ngForm" (ngSubmit)="postUsers(userForm)" novalidate>
+            <input type="hidden" class="form-control mt-2" name="_id" #_id="ngModel" [(ngModel)]="userService.selectedUser._id" placeholder="_id">
+
+            <!--Name-->
+            <div class="form-group mt-2">
+                <label for="name mt-2">Enter the Name:</label>
+                <input type="text" class="form-control" name="name" maxlength="32" #name="ngModel" required id="name" pattern="{1,32}"
+                [(ngModel)]="userService.selectedUser.name" class="form-control" [class.success]="!name.invalid">
+                 <div *ngIf="name.errors &&(name.touched || name.dirty)" class ="text-error mt-2">
+                      Enter the Name - Max (32) Characters
+                </div>
+            </div>
+
+            
+            <!--Age-->
+            <div class="form-group mt-4">
+                <label for="age mt-2">Enter Age:</label>
+                <input type="number" class="form-control" name="age" maxlength="3" minlength="1" #age="ngModel" required id="age" pattern="^(1?[1-9]|[1-9][0-9]|100)$"
+                [(ngModel)]="userService.selectedUser.age" class="form-control" [class.success]="!age.invalid">
+                 <div *ngIf="age.errors &&(age.touched || age.dirty)" class ="text-error mt-2">
+                      Enter valid age & age should be (1 - 100)
+                </div>
+            </div>
+
+            <!--Email-->
+            <div class="form-group mt-4">
+                <label for="email mt-2">Enter the Email:</label>
+                <input type="email" class="form-control" name="email" #email="ngModel" required id="email" pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                [(ngModel)]="userService.selectedUser.email" class="form-control" [class.success]="!email.invalid">
+                 <div *ngIf="email.errors &&(email.touched || email.dirty)" class ="text-error mt-2">
+                     Enter Valid Email pattern - john@mail.com
+                </div>
+            </div>
+
+            <!--phone number-->
+            <div class="form-group mt-4">
+                <label for="phone_Number mt-2">Enter the Phone Number:</label>
+                <input type="number" class="form-control" size="10" name="phone_Number" #phone_Number="ngModel" required id="phone_Number" pattern="^[6-9]\d{9}$"
+                [(ngModel)]="userService.selectedUser.phone_Number" class="form-control" [class.success]="!phone_Number.invalid">
+                 <div *ngIf="phone_Number.errors &&(phone_Number.touched || phone_Number.dirty)" class ="text-error mt-2">
+                      Enter valid phone number (10) 
+                </div>
+            </div>
+
+
+            <button type="submit" class="btn btn btn-primary mt-4" [disabled]="!userForm.form.valid" (click)="modal.dismiss('Cross click')">Update</button>
+            <button type="reset" class="btn btn btn-danger mt-4" style="float:right">Reset</button>
+        </form>
+    </div>
+
+</ng-template>
+
+

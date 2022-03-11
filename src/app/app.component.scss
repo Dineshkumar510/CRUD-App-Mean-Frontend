@@ -1,0 +1,195 @@
+
+
+//delete button css
+.noselect {
+    width: 150px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background: rgba(212, 19, 19, 0.87);
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+    background: rgba(212, 19, 19, 0.87);
+   }
+
+   .error{
+     color: rgba(212, 19, 19, 0.87);
+   }
+   
+   .noselect span {
+    transition: 200ms;
+   }
+   
+   .noselect .text {
+    transform: translateX(35px);
+    color: white;
+    font-weight: bold;
+   }
+   
+   .noselect .icon {
+    position: absolute;
+    border-left: 1px solid #c41b1b;
+    transform: translateX(110px);
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   }
+   
+   .noselect svg {
+    width: 15px;
+    fill: #eee;
+   }
+   
+   .noselect:hover {
+    background: #ff3636;
+   }
+   
+   .noselect:hover .text {
+    color: transparent;
+   }
+   
+   .noselect:hover .icon {
+    width: 150px;
+    border-left: none;
+    transform: translateX(0);
+   }
+   
+   .noselect:focus {
+    outline: none;
+   }
+   
+   .noselect:active .icon svg {
+    transform: scale(0.8);
+   }
+
+
+   .btn{
+	box-shadow: none !important
+    }
+
+
+    .example-form {
+        min-width: 150px;
+        max-width: 500px;
+        width: 100%;
+      }
+      
+      .example-full-width {
+        width: 100%;
+      }
+  
+
+      #table-row:hover{
+        background-color: #e8eaf0;
+        cursor: pointer;
+      }
+
+
+      .btn-close{
+        box-shadow: none;
+      }
+
+      .userdata{
+        text-align: center;
+      }
+
+      .modal-title{
+        font-size: 23px;
+        margin-top: 15px;
+      }
+
+      input[type=number]::-webkit-inner-spin-button, 
+      input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      margin: 0; 
+    }
+
+    .image{
+      width: 80px;
+      border-radius: 50%;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+      -o-border-radius: 50%;
+}
+
+
+  .userdatas {
+    height: 50px;
+    text-align:center;
+    vertical-align: middle;
+  }
+
+  .success{
+    border: 1px solid rgb(0, 255, 55);
+    }
+    .text-error{
+        color: red;
+    }
+
+    
+      //card css
+
+      .card {
+        width: 200px;
+        height: 250px;
+        background: #07182E;
+        border-radius: 10%;
+        text-align: center;
+        color: #f0f0f0;
+        font-family: inherit;
+        z-index: 1;
+        -webkit-border-radius: 10%;
+        -moz-border-radius: 10%;
+        -ms-border-radius: 10%;
+        -o-border-radius: 10%;
+}
+      
+      .img {
+        display: flex;
+        margin: 60px auto 10px auto;
+        width: 85px;
+        height: 85px;
+        border-radius: 100%;
+        font-size: 11px;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.5s;
+        z-index: 99;
+        -webkit-border-radius: 100%;
+        -moz-border-radius: 100%;
+        -ms-border-radius: 100%;
+        -o-border-radius: 100%;
+}
+      
+      p {
+        opacity: 0;
+        transition: all 0.5s;
+      }
+      
+      h1 {
+        padding: 10px;
+        font-weight: 500;
+        font-size: 18px;
+      }
+      
+      svg {
+        padding: 0 5px;
+        cursor: pointer;
+      }
+      
+      .card:hover .img {
+        transform: scale(1.1);
+      }
+      
+      .card:hover h1,
+      .card:hover p {
+        opacity: 1;
+      }
+
