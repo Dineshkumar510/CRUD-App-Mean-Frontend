@@ -1,8 +1,11 @@
 Deployed App link : https://dreamy-thompson-1a8cf7.netlify.app/
 
-Frontend -FrameWork : Angular 13
-Backend : node.js 
+Frontend - FrameWork : Angular 13
+
+Backend : Node.js 
+
 Backend - FrameWork : Express.js
+
 DataBase : MongoDB
 
 Functionality : CRUD Operations
