@@ -10,7 +10,6 @@ export class UserService {
   selectedUser!: User;
   Users!: User[];
   
-  
   constructor(private http:HttpClient) {
     this.selectedUser = new User();
   }
