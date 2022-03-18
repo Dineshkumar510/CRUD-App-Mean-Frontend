@@ -1,4 +1,4 @@
-Deployed App link : https://dreamy-thompson-1a8cf7.netlify.app/
+Deployed App link : https://elegant-engelbart-503e54.netlify.app/
 
 Frontend - FrameWork : Angular 13
 
